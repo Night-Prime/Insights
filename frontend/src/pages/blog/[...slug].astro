@@ -1,0 +1,47 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import BlogPost from "../../layouts/BlogPost.astro";
+import axios from "axios";
+import qs from "qs";
+import BlogItem from "../../components/BlogItem.astro";
+
+export async function getStaticPaths() {
+  let url = import.meta.env.STRAPI_URL + "/api/posts";
+
+  const query = qs.stringify({
+    populate: {
+      featured_image: {
+        fields: ["name", "width", "height", "url"],
+      },
+      author: {
+        populate: {
+          image: {
+            fields: ["name", "width", "height", "url"],
+          },
+        },
+      },
+      category: {
+        populate: true,
+      },
+    },
+  });
+
+  try {
+    const res = await axios.get(url + "?" + query);
+    const paths = res.data.data.map((post) => ({
+      params: { slug: post.attributes.slug },
+      props: { post },
+    }));
+    return paths; // Return the array of paths
+  } catch (error) {
+    console.log(error);
+    throw Error(error);
+  }
+}
+
+const { post } = Astro.props;
+---
+
+<BlogPost title="Insights">
+  <BlogItem post={post} />
+</BlogPost>
