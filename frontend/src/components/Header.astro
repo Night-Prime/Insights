@@ -1,51 +1,82 @@
 ---
-import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
+import HeaderLink from "./HeaderLink.astro";
+import { SITE_TITLE } from "../consts";
 ---
 
 <header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
-		</div>
-	</nav>
+  <nav>
+    <h6><a href="/">{SITE_TITLE}</a></h6>
+    <div class="internal-links">
+      <span>
+        <HeaderLink href="/">Home</HeaderLink>
+      </span>
+      <span>
+        <HeaderLink href="/blog">Blog</HeaderLink>
+      </span>
+      <span>
+        <HeaderLink href="/about">About</HeaderLink>
+      </span>
+    </div>
+  </nav>
 </header>
 <style>
-	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
-	}
+  header {
+    height: 65px;
+    margin: 0 auto;
+    padding: 0.5em 1em;
+    background: transparent;
+    backdrop-filter: blur(2px);
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+  }
 
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
-	}
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
-	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
-	}
-	.social-links,
-	.social-links a {
-		display: flex;
-	}
+  h6 {
+    margin: 0;
+    font-weight: 400;
+  }
+
+  h6 a,
+  h6 a.active {
+    color: white;
+    text-decoration: none;
+    font-weight: 200;
+    /* font-size: 0.75em; */
+  }
+  nav {
+    width: 45%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    background: rgb(var(--gray-dark));
+    border: rgb(var(--gray-dark));
+    border-radius: 85px;
+    padding-inline: 1vw;
+
+    box-shadow: -1px -1px 5px 1px rgba(55, 55, 55, 0.89) inset;
+    -webkit-box-shadow: -1px -1px 5px 1px rgba(55, 55, 55, 0.89) inset;
+    -moz-box-shadow: -1px -1px 5px 1px rgba(55, 55, 55, 0.89) inset;
+  }
+
+  .internal-links {
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .internal-links > span {
+    height: 98%;
+  }
+  nav a {
+    width: 100px;
+    text-decoration: none;
+  }
+  .social-links,
+  .social-links a {
+    display: flex;
+  }
 </style>
